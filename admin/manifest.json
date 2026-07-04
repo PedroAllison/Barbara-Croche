@@ -1,0 +1,17 @@
+{
+  "name": "Barbara Crochê - Painel",
+  "short_name": "Barbara Admin",
+  "description": "Painel de gestão da loja Barbara Crochê",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f1f6",
+  "theme_color": "#b84e74",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/admin/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/admin/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/admin/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produto · Barbara Crochê</title>
+  <link rel="stylesheet" href="/css/store.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo"><span>🧶</span> <span id="store-name">Barbara Crochê</span></a>
+      <div class="header-actions"><span id="account-area"></span></div>
+    </div>
+  </header>
+
+  <main class="container product-page">
+    <a href="/" class="back-link">← Voltar para a loja</a>
+    <div id="product-detail" class="product-detail"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><strong id="footer-store">Barbara Crochê</strong><p class="muted" id="footer-tagline"></p></div>
+      <div id="footer-contact"></div>
+      <div class="muted small">© <span id="year"></span> · Sistema por ARKTECH SYSTEMS</div>
+    </div>
+  </footer>
+
+  <!-- MODAL CONTA -->
+  <div id="account-modal" class="modal hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="account-close">✕</button>
+      <div id="account-tabs" class="tabs">
+        <button class="tab-btn active" data-at="login">Entrar</button>
+        <button class="tab-btn" data-at="register">Criar conta</button>
+      </div>
+      <form id="login-form" class="account-form">
+        <p class="muted">Entre para falar com o vendedor.</p>
+        <label>E-mail</label><input id="li-email" type="email" required />
+        <label>Senha</label><input id="li-pass" type="password" required />
+        <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+        <p id="li-msg" class="error-text"></p>
+      </form>
+      <form id="register-form" class="account-form hidden">
+        <p class="muted">Crie sua conta para falar com o vendedor.</p>
+        <label>Nome</label><input id="rg-name" type="text" required />
+        <label>E-mail</label><input id="rg-email" type="email" required />
+        <label>Telefone / WhatsApp</label><input id="rg-phone" type="text" placeholder="opcional" />
+        <label>Senha</label><input id="rg-pass" type="password" required />
+        <button class="btn btn-primary btn-block" type="submit">Criar conta</button>
+        <p id="rg-msg" class="error-text"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/produto.js"></script>
+</body>
+</html>
