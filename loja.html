@@ -3,25 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Produto · Barbara Crochê</title>
+  <title>Barbara Crochê · Loja</title>
   <link rel="stylesheet" href="/css/store.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a href="/loja" class="logo"><span>🧶</span> <span id="store-name">Barbara Crochê</span></a>
-      <div class="header-actions"><span id="account-area"></span></div>
+      <div class="header-actions">
+        <span id="account-area"></span>
+      </div>
     </div>
   </header>
 
-  <main class="container product-page">
-    <a href="/loja" class="back-link">← Voltar para a loja</a>
-    <div id="product-detail" class="product-detail"></div>
+  <section class="hero">
+    <div class="container">
+      <h1 id="hero-title">Tudo para o seu crochê</h1>
+      <p id="hero-tagline">Linhas, fios, agulhas e acessórios selecionados.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="catalog-toolbar">
+      <input id="search" type="search" placeholder="🔍 Buscar produto..." />
+      <select id="category-filter"><option value="">Todas as categorias</option></select>
+    </div>
+
+    <div id="products-grid" class="products-grid"></div>
+    <p id="empty-msg" class="empty hidden">Nenhum produto encontrado.</p>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div><strong id="footer-store">Barbara Crochê</strong><p class="muted" id="footer-tagline"></p></div>
+      <div>
+        <strong id="footer-store">Barbara Crochê</strong>
+        <p class="muted" id="footer-tagline"></p>
+      </div>
       <div id="footer-contact"></div>
       <div class="muted small">© <span id="year"></span> · Sistema por ARKTECH SYSTEMS</div>
     </div>
@@ -57,6 +74,6 @@
   <div id="toast" class="toast hidden"></div>
 
   <script src="/js/common.js"></script>
-  <script src="/js/produto.js"></script>
+  <script src="/js/catalog.js"></script>
 </body>
 </html>

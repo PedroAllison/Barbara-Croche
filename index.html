@@ -3,77 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Barbara Crochê · Loja</title>
-  <link rel="stylesheet" href="/css/store.css" />
+  <title>Barbara Crochê · Em breve</title>
+  <style>
+    :root{
+      --pink:#d6638a; --pink-dark:#b84e74; --ink:#2c2230; --muted:#8a7f8f;
+      --green:#25d366;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0; min-height:100vh; font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+      color:var(--ink); background:linear-gradient(135deg,#f7e3ec,#efe6f4);
+      display:grid; place-items:center; padding:24px;
+    }
+    .card{
+      background:#fff; border-radius:22px; padding:44px 34px; max-width:440px; width:100%;
+      text-align:center; box-shadow:0 18px 50px rgba(120,60,90,.15);
+    }
+    .yarn{font-size:64px; line-height:1;}
+    h1{color:var(--pink-dark); margin:14px 0 4px; font-size:28px;}
+    .tag{color:var(--muted); margin:0 0 22px; font-size:15px;}
+    .build{
+      display:inline-block; background:#fbe9f0; color:var(--pink-dark);
+      padding:8px 16px; border-radius:20px; font-weight:700; font-size:14px; margin-bottom:18px;
+    }
+    p.msg{color:#4a414e; line-height:1.6; margin:0 0 24px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; justify-content:center;
+      width:100%; padding:13px; border-radius:12px; text-decoration:none; font-weight:700;
+      font-size:15px; margin-top:10px; border:none; cursor:pointer;
+    }
+    .btn-whats{background:var(--green); color:#fff;}
+    .btn-mail{background:#fff; color:var(--pink-dark); border:1px solid #ece4ee;}
+    .foot{margin-top:26px; color:var(--muted); font-size:12px;}
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="logo"><span>🧶</span> <span id="store-name">Barbara Crochê</span></a>
-      <div class="header-actions">
-        <span id="account-area"></span>
-      </div>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <h1 id="hero-title">Tudo para o seu crochê</h1>
-      <p id="hero-tagline">Linhas, fios, agulhas e acessórios selecionados.</p>
-    </div>
-  </section>
-
-  <main class="container">
-    <div class="catalog-toolbar">
-      <input id="search" type="search" placeholder="🔍 Buscar produto..." />
-      <select id="category-filter"><option value="">Todas as categorias</option></select>
-    </div>
-
-    <div id="products-grid" class="products-grid"></div>
-    <p id="empty-msg" class="empty hidden">Nenhum produto encontrado.</p>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <strong id="footer-store">Barbara Crochê</strong>
-        <p class="muted" id="footer-tagline"></p>
-      </div>
-      <div id="footer-contact"></div>
-      <div class="muted small">© <span id="year"></span> · Sistema por ARKTECH SYSTEMS</div>
-    </div>
-  </footer>
-
-  <!-- MODAL CONTA -->
-  <div id="account-modal" class="modal hidden">
-    <div class="modal-card">
-      <button class="modal-close" id="account-close">✕</button>
-      <div id="account-tabs" class="tabs">
-        <button class="tab-btn active" data-at="login">Entrar</button>
-        <button class="tab-btn" data-at="register">Criar conta</button>
-      </div>
-      <form id="login-form" class="account-form">
-        <p class="muted">Entre para falar com o vendedor.</p>
-        <label>E-mail</label><input id="li-email" type="email" required />
-        <label>Senha</label><input id="li-pass" type="password" required />
-        <button class="btn btn-primary btn-block" type="submit">Entrar</button>
-        <p id="li-msg" class="error-text"></p>
-      </form>
-      <form id="register-form" class="account-form hidden">
-        <p class="muted">Crie sua conta para falar com o vendedor.</p>
-        <label>Nome</label><input id="rg-name" type="text" required />
-        <label>E-mail</label><input id="rg-email" type="email" required />
-        <label>Telefone / WhatsApp</label><input id="rg-phone" type="text" placeholder="opcional" />
-        <label>Senha</label><input id="rg-pass" type="password" required />
-        <button class="btn btn-primary btn-block" type="submit">Criar conta</button>
-        <p id="rg-msg" class="error-text"></p>
-      </form>
-    </div>
+  <div class="card">
+    <div class="yarn">🧶</div>
+    <h1 id="store-name">Barbara Crochê</h1>
+    <p class="tag" id="tagline">Linhas, agulhas e tudo para o seu crochê</p>
+    <div class="build">🚧 Site em construção</div>
+    <p class="msg">Estamos preparando nossa lojinha com muito carinho.<br>Em breve, tudo para o seu crochê por aqui! 💕</p>
+    <div id="contact"></div>
+    <div class="foot">© <span id="year"></span> · Barbara Crochê</div>
   </div>
 
-  <div id="toast" class="toast hidden"></div>
-
-  <script src="/js/common.js"></script>
-  <script src="/js/catalog.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    fetch('/api/store/info').then(r=>r.json()).then(info=>{
+      if(info.store_name) document.getElementById('store-name').textContent = info.store_name;
+      if(info.store_tagline) document.getElementById('tagline').textContent = info.store_tagline;
+      var c = document.getElementById('contact'); var html='';
+      if(info.seller_whatsapp){
+        html += '<a class="btn btn-whats" target="_blank" href="https://wa.me/'+info.seller_whatsapp+
+                '?text='+encodeURIComponent('Olá! Vi o site da Barbara Crochê e gostaria de mais informações.')+
+                '">💬 Falar no WhatsApp</a>';
+      }
+      if(info.seller_email){
+        html += '<a class="btn btn-mail" href="mailto:'+info.seller_email+'">✉️ '+info.seller_email+'</a>';
+      }
+      c.innerHTML = html;
+    }).catch(function(){});
+  </script>
 </body>
 </html>

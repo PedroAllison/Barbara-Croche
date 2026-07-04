@@ -4,18 +4,24 @@
  */
 const { Pool } = require('pg');
 
-const connectionString = process.env.DATABASE_URL;
+let connectionString = process.env.DATABASE_URL || '';
 if (!connectionString) {
   console.warn('[ATENCAO] DATABASE_URL nao definido. Configure a variavel de ambiente (Supabase).');
 }
+
+// Remove "sslmode=..." do texto para evitar conflito de verificacao de certificado.
+// O SSL e definido abaixo (rejectUnauthorized:false) - o Supabase usa cert proprio.
+connectionString = connectionString.replace(/([?&])sslmode=[^&]*/i, '$1').replace(/[?&]+$/, '');
+
+const isLocal = connectionString.includes('localhost') || connectionString.includes('127.0.0.1');
 
 // Pool pequeno e reutilizado entre invocacoes "quentes" do serverless.
 const pool = new Pool({
   connectionString,
   max: 3,
   idleTimeoutMillis: 10000,
-  // Supabase exige SSL
-  ssl: connectionString && connectionString.includes('localhost') ? false : { rejectUnauthorized: false },
+  // Supabase exige SSL, mas com certificado proprio (nao verificar a cadeia)
+  ssl: isLocal ? false : { rejectUnauthorized: false },
 });
 
 /**
